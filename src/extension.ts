@@ -24,24 +24,13 @@ export function activate(context: vscode.ExtensionContext) {
 			return;  // No open text editor
 		}
 
-		var firstLine = textEditor.document.lineAt(0);
-		console.log(firstLine);
-		var lastLine = textEditor.document.lineAt(textEditor.document.lineCount - 1);
-		// var textRange = new vscode.Range(0,
-		// 	firstLine.range.start.character,
-		// 	textEditor.document.lineCount - 1,
-		// 	lastLine.range.end.character);
-
-		for (var i = 0; i < textEditor.document.lineCount; i++) {
-			let regex = new RegExp("print");
-			console.log(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-
-			var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-			textEditor.edit(function (editBuilder) {
+		textEditor.edit(function (editBuilder) {
+			for (var i = 0; i < textEditor.document.lineCount; i++) {
+				let regex = new RegExp("print");
+				var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
 				editBuilder.replace(textRange, '$1');
-				console.log(i);
-			});
-		}
+			}
+		});
 
 
 	});
