@@ -24,14 +24,40 @@ export function activate(context: vscode.ExtensionContext) {
 			return;  // No open text editor
 		}
 
-		textEditor.edit(function (editBuilder) {
-			for (var i = 0; i < textEditor.document.lineCount; i++) {
-				let regex = new RegExp("print");
-				var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-				editBuilder.replace(textRange, '$1');
-			}
-		});
+		let filename = textEditor.document.fileName;
+		let langId = textEditor.document.languageId;
 
+		let jslang = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'];
+		let pylang = ['python'];
+
+		if (jslang.includes(langId)) {
+			// JS Stuff console.log()
+			textEditor.edit(function (editBuilder) {
+				// Iterate through each line
+				for (var i = 0; i < textEditor.document.lineCount; i++) {
+					// Iterate through each char in a line
+					let linetext = textEditor.document.lineAt(i).text;
+					var newline = linetext;
+					// for (var j = 0; j < textEditor.document.lineAt(i).range.end.character; j++) {
+					if (linetext.includes('console.log')) {
+						newline = "// " + linetext;
+					}
+					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					editBuilder.replace(textRange, newline);
+					// let regex = new RegExp("print");
+
+					// }
+					// var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					// editBuilder.replace(textRange, '$1');
+				}
+			});
+		}
+		else if (langId in pylang) {
+			// Python Stuff print()
+		}
+		else {
+			return;
+		}
 
 	});
 
