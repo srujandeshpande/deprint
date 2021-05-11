@@ -52,8 +52,23 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			});
 		}
-		else if (langId in pylang) {
+		else if (pylang.includes(langId)) {
 			// Python Stuff print()
+			textEditor.edit(function (editBuilder) {
+				// Iterate through each line
+				for (var i = 0; i < textEditor.document.lineCount; i++) {
+					// Iterate through each char in a line
+					let linetext = textEditor.document.lineAt(i).text;
+					var newline = linetext;
+					// TODO if line is a comment skip it
+					// Check for open bracket to make sure no other stuff gets randomly commented
+					if (linetext.includes('print(') || linetext.includes('print (')) {
+						newline = "# " + linetext;
+					}
+					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					editBuilder.replace(textRange, newline);
+				}
+			});
 		}
 		else {
 			return;
