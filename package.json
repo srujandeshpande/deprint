@@ -3,6 +3,12 @@
 	"displayName": "DePrint",
 	"description": "Removes print and console logs from your code",
 	"version": "0.0.1",
+	"publisher": "srujandeshpande",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/srujandeshpande/deprint"
+	},
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.56.0"
 	},
