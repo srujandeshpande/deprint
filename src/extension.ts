@@ -53,6 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 		else if (pylang.includes(langId)) {
+			var regex = "[# \t]*print\s*\(.*\)"
 			// Python Stuff print()
 			textEditor.edit(function (editBuilder) {
 				// Iterate through each line
