@@ -53,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 		else if (pylang.includes(langId)) {
-			var regex = "[# \t]*print\s*\(.*\)"
+			var pyRegex = "([ \t]*(?!#)[ \t]*print\s*\(.*\))"
 			// Python Stuff print()
 			textEditor.edit(function (editBuilder) {
 				// Iterate through each line
@@ -63,7 +63,9 @@ export function activate(context: vscode.ExtensionContext) {
 					var newline = linetext;
 					// TODO if line is a comment skip it
 					// Check for open bracket to make sure no other stuff gets randomly commented
-					if (linetext.includes('print(') || linetext.includes('print (')) {
+
+					// if (linetext.includes('print(') || linetext.includes('print (')) {
+					if (linetext.match(pyRegex)) {
 						newline = "# " + linetext;
 					}
 					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
