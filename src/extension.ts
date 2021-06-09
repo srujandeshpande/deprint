@@ -1,5 +1,4 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+const { langs, patterns } = require('./constants.js')
 import * as vscode from 'vscode';
 
 // this method is called when your extension is activated
@@ -27,10 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let filename = textEditor.document.fileName;
 		let langId = textEditor.document.languageId;
 
-		let jslang = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'];
-		let pylang = ['python'];
-
-		if (jslang.includes(langId)) {
+		if (langs.js.includes(langId)) {
 			// JS Stuff console.log()
 			textEditor.edit(function (editBuilder) {
 				// Iterate through each line
@@ -38,22 +34,16 @@ export function activate(context: vscode.ExtensionContext) {
 					// Iterate through each char in a line
 					let linetext = textEditor.document.lineAt(i).text;
 					var newline = linetext;
-					// for (var j = 0; j < textEditor.document.lineAt(i).range.end.character; j++) {
+
 					if (linetext.includes('console.log')) {
 						newline = "// " + linetext;
 					}
 					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
 					editBuilder.replace(textRange, newline);
-					// let regex = new RegExp("print");
-
-					// }
-					// var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-					// editBuilder.replace(textRange, '$1');
 				}
 			});
 		}
-		else if (pylang.includes(langId)) {
-			var pyRegex = "([ \t]*(?!#)[ \t]*print\s*\(.*\))"
+		else if (langs.py.includes(langId)) {
 			// Python Stuff print()
 			textEditor.edit(function (editBuilder) {
 				// Iterate through each line
@@ -64,8 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
 					// TODO if line is a comment skip it
 					// Check for open bracket to make sure no other stuff gets randomly commented
 
-					// if (linetext.includes('print(') || linetext.includes('print (')) {
-					if (linetext.match(pyRegex)) {
+					if (linetext.match(patterns.py.print)) {
 						newline = "# " + linetext;
 					}
 					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
