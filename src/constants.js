@@ -5,9 +5,11 @@ const langs = {
 
 const patterns = {
     py: {
-        print: "([ \t]*(?!#)[ \t]*print\s*\(.*\))",
+        print: "^[ \t]*print[ \t]*\(.*\)",
     },
-    slash: {},
+    slash: {
+        log: "^[ \t]*console\.log[ \t]*\(.*\)",
+    },
 };
 
 module.exports = { langs, patterns };
