@@ -7,7 +7,7 @@ const patterns = {
     py: {
         print: "^[ \t]*print[ \t]*\(.*\)",
     },
-    slash: {
+    js: {
         log: "^[ \t]*console\.log[ \t]*\(.*\)",
     },
 };

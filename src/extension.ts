@@ -31,12 +31,15 @@ export function activate(context: vscode.ExtensionContext) {
 			textEditor.edit(function (editBuilder) {
 				// Iterate through each line
 				for (var i = 0; i < textEditor.document.lineCount; i++) {
-					// Iterate through each char in a line
 					let linetext = textEditor.document.lineAt(i).text;
 					var newline = linetext;
 
-					if (linetext.includes('console.log')) {
-						newline = "// " + linetext;
+					if (linetext.match(patterns.js.log)) {
+						var j = 0;
+						for (j = 0; j < linetext.length; j++) {
+							if (linetext[j] != ' ' && linetext[j] != '\t') break;
+						}
+						newline = [linetext.slice(0, j), "// ", linetext.slice(j)].join('');
 					}
 					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
 					editBuilder.replace(textRange, newline);
