@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('deprint.comment', () => {
+	let commentPrint = vscode.commands.registerCommand('deprint.comment.print', () => {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
@@ -71,17 +71,25 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 	});
+	context.subscriptions.push(commentPrint);
 
-	context.subscriptions.push(disposable);
 
-	let disposable2 = vscode.commands.registerCommand('deprint.delete', () => {
+	let deleteCommentedPrint = vscode.commands.registerCommand('deprint.delete.comment.print', () => {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Deleting Commented print and log statements!');
 	});
+	context.subscriptions.push(deleteCommentedPrint);
 
-	context.subscriptions.push(disposable2);
+
+	let deleteComment = vscode.commands.registerCommand('deprint.delete.comment', () => {
+		// The code you place here will be executed every time your command is executed
+
+		// Display a message box to the user
+		vscode.window.showInformationMessage('Deleting all comments');
+	});
+	context.subscriptions.push(deleteComment);
 }
 
 // this method is called when your extension is deactivated

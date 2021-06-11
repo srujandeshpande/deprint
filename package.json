@@ -16,19 +16,24 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:deprint.comment",
-		"onCOmmand:deprint.delete"
+		"onCommand:deprint.comment.print",
+		"onCommand:deprint.delete.comment.print",
+		"onCommand:deprint.delete.comment"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "deprint.comment",
+				"command": "deprint.comment.print",
 				"title": "Comment Print and Logs"
 			},
 			{
-				"command": "deprint.delete",
+				"command": "deprint.delete.comment.print",
 				"title": "Delete Commented Print and Logs"
+			},
+			{
+				"command": "deprint.delete.comment",
+				"title": "Delete All Comments"
 			}
 		]
 	},
