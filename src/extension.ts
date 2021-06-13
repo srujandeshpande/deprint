@@ -84,10 +84,50 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 	let deleteComment = vscode.commands.registerCommand('deprint.delete.comment', () => {
-		// The code you place here will be executed every time your command is executed
 
-		// Display a message box to the user
 		vscode.window.showInformationMessage('Deleting all comments');
+
+		const textEditor = vscode.window.activeTextEditor;
+		if (!textEditor) {
+			return;  // No open text editor
+		}
+
+		let langId = textEditor.document.languageId;
+
+		if (langs.hash.includes(langId)) {
+			textEditor.edit(function (editBuilder) {
+				// Iterate through each line
+				for (var i = 0; i < textEditor.document.lineCount; i++) {
+					let linetext = textEditor.document.lineAt(i).text;
+					var newline = linetext;
+
+					if (linetext.match(patterns.comment.hash)) {
+						newline = "";
+					}
+					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					editBuilder.replace(textRange, newline);
+				}
+			});
+		}
+		else if (langs.slash.includes(langId)) {
+			textEditor.edit(function (editBuilder) {
+				// Iterate through each line
+				for (var i = 0; i < textEditor.document.lineCount; i++) {
+					let linetext = textEditor.document.lineAt(i).text;
+					var newline = linetext;
+
+					if (linetext.match(patterns.comment.slash)) {
+						newline = "";
+					}
+					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					editBuilder.replace(textRange, newline);
+				}
+			});
+		}
+		else {
+			return;
+		}
+
 	});
 	context.subscriptions.push(deleteComment);
 }

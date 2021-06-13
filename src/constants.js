@@ -1,6 +1,8 @@
 const langs = {
     js: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-    py: ['python']
+    py: ['python'],
+    hash: ['python'],
+    slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++']
 };
 
 const patterns = {
@@ -10,6 +12,10 @@ const patterns = {
     js: {
         log: "^[ \t]*console\.log[ \t]*\(.*\)",
     },
+    comment: {
+        hash: "^[ \t]*#.*",
+        slash: "^[ \t]*\/\/.*"
+    }
 };
 
 module.exports = { langs, patterns };
