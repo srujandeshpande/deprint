@@ -94,13 +94,11 @@ export function activate(context: vscode.ExtensionContext) {
 				// Iterate through each line
 				for (var i = 0; i < textEditor.document.lineCount; i++) {
 					let linetext = textEditor.document.lineAt(i).text;
-					var newline = linetext;
 
 					if (linetext.match(patterns.js.logComment)) {
-						newline = "";
+						var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
+						editBuilder.replace(textRange, "");
 					}
-					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-					editBuilder.replace(textRange, newline);
 				}
 			});
 		}
@@ -110,13 +108,11 @@ export function activate(context: vscode.ExtensionContext) {
 				// Iterate through each line
 				for (var i = 0; i < textEditor.document.lineCount; i++) {
 					let linetext = textEditor.document.lineAt(i).text;
-					var newline = linetext;
 
 					if (linetext.match(patterns.py.printComment)) {
-						newline = "";
+						var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
+						editBuilder.replace(textRange, "");
 					}
-					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-					editBuilder.replace(textRange, newline);
 				}
 			});
 		}
@@ -145,13 +141,11 @@ export function activate(context: vscode.ExtensionContext) {
 				// Iterate through each line
 				for (var i = 0; i < textEditor.document.lineCount; i++) {
 					let linetext = textEditor.document.lineAt(i).text;
-					var newline = linetext;
 
 					if (linetext.match(patterns.comment.hash)) {
-						newline = "";
+						var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
+						editBuilder.replace(textRange, "");
 					}
-					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-					editBuilder.replace(textRange, newline);
 				}
 			});
 		}
@@ -160,13 +154,11 @@ export function activate(context: vscode.ExtensionContext) {
 				// Iterate through each line
 				for (var i = 0; i < textEditor.document.lineCount; i++) {
 					let linetext = textEditor.document.lineAt(i).text;
-					var newline = linetext;
 
 					if (linetext.match(patterns.comment.slash)) {
-						newline = "";
+						var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
+						editBuilder.replace(textRange, "");
 					}
-					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
-					editBuilder.replace(textRange, newline);
 				}
 			});
 		}
