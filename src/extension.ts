@@ -78,7 +78,53 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Coming soon.');
+		vscode.window.showInformationMessage('Deleting commented print statements');
+
+		const textEditor = vscode.window.activeTextEditor;
+		if (!textEditor) {
+			return;  // No open text editor
+		}
+
+		let filename = textEditor.document.fileName;
+		let langId = textEditor.document.languageId;
+
+		if (langs.js.includes(langId)) {
+			// JS Stuff console.log()
+			textEditor.edit(function (editBuilder) {
+				// Iterate through each line
+				for (var i = 0; i < textEditor.document.lineCount; i++) {
+					let linetext = textEditor.document.lineAt(i).text;
+					var newline = linetext;
+
+					if (linetext.match(patterns.js.logComment)) {
+						newline = "";
+					}
+					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					editBuilder.replace(textRange, newline);
+				}
+			});
+		}
+		else if (langs.py.includes(langId)) {
+			// Python Stuff print()
+			textEditor.edit(function (editBuilder) {
+				// Iterate through each line
+				for (var i = 0; i < textEditor.document.lineCount; i++) {
+					let linetext = textEditor.document.lineAt(i).text;
+					var newline = linetext;
+
+					if (linetext.match(patterns.py.printComment)) {
+						newline = "";
+					}
+					var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+					editBuilder.replace(textRange, newline);
+				}
+			});
+		}
+		else {
+			return;
+		}
+
+
 	});
 	context.subscriptions.push(deleteCommentedPrint);
 

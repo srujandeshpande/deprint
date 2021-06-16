@@ -8,9 +8,11 @@ const langs = {
 const patterns = {
     py: {
         print: "^[ \t]*print[ \t]*\(.*\)",
+        printComment: "^[ \t]*#[ \t]*print[ \t]*\(.*\)"
     },
     js: {
         log: "^[ \t]*console\.log[ \t]*\(.*\)",
+        logComment: "^[ \t]*\/\/[ \t]*console\.log[ \t]*\(.*\)"
     },
     comment: {
         hash: "^[ \t]*#.*",
