@@ -14,6 +14,10 @@ const patterns = {
     log: "^[ \t]*console\.log[ \t]*\(.*\)",
     logComment: "^[ \t]*\/\/[ \t]*console\.log[ \t]*\(.*\)"
   },
+  c: {
+    printf: "^[ \t]*printf[ \t]*\(.*\)[ \t]*;[ \t]*$",
+    cout: "^[ \t]*cout.*<<.*;[ \t]*$"
+  },
   comment: {
     hash: "^[ \t]*#.*",
     slash: "^[ \t]*\/\/.*"
