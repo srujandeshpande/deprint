@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
   let commentPrint = vscode.commands.registerCommand('deprint.comment.print', () => {
-    // The code you place here will be executed every time your command is executed
+    // COMMENT PRINT AND LOGS
 
     // Display a message box to the user
     vscode.window.showInformationMessage('Commenting print and log statements!');
@@ -60,6 +60,25 @@ export function activate(context: vscode.ExtensionContext) {
               if (linetext[j] != ' ' && linetext[j] != '\t') break;
             }
             newline = [linetext.slice(0, j), "# ", linetext.slice(j)].join('');
+          }
+          var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+          editBuilder.replace(textRange, newline);
+        }
+      });
+    }
+    else if (langs.c.includes(langId)) {
+      // C,C++ Stuff print()
+      textEditor.edit(function (editBuilder) {
+        for (var i = 0; i < textEditor.document.lineCount; i++) {
+          let linetext = textEditor.document.lineAt(i).text;
+          var newline = linetext;
+
+          if (linetext.match(patterns.c.printf) || linetext.match(patterns.c.cout)) {
+            var j = 0;
+            for (j = 0; j < linetext.length; j++) {
+              if (linetext[j] != ' ' && linetext[j] != '\t') break;
+            }
+            newline = [linetext.slice(0, j), "// ", linetext.slice(j)].join('');
           }
           var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
           editBuilder.replace(textRange, newline);

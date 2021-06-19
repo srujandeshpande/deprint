@@ -1,6 +1,7 @@
 const langs = {
   js: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
   py: ['python'],
+  c: ['c', 'cpp'],
   hash: ['python'],
   slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++']
 };
