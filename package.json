@@ -2,7 +2,7 @@
   "name": "deprint",
   "displayName": "DePrint",
   "description": "Removes print and console logs from your code",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "srujandeshpande",
   "repository": {
     "type": "git",
