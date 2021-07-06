@@ -3,7 +3,7 @@ const langs = {
   py: ['python'],
   c: ['c', 'cpp'],
   hash: ['python'],
-  slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++']
+  slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java']
 };
 
 const patterns = {
