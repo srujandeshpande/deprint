@@ -17,3 +17,6 @@ This deletes all statements in the current file. (Coming Soon!)
 ## Disclaimer
 
 This extension is still in beta. Some issues are expected to occur and will be fixed in coming releases. Feel free to open Issues on our GitHub repository to highlght bugs or request new features.
+
+## Contributing
+Checkout the [Contributing Guildelines](https://github.com/acmpesuecc/deprint/blob/master/CONTRIBUTING.md)
