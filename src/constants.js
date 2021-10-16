@@ -2,11 +2,15 @@ const langs = {
   js: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
   py: ['python'],
   c: ['c', 'cpp'],
+  sh: ['bash'],
   hash: ['python'],
   slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java']
 };
 
 const patterns = {
+  sh: {
+    echoComment: "^[ \t]*#[ \t]*echo[ \t]*$"
+  },
   py: {
     print: "^[ \t]*print[ \t]*\(.*\)",
     printComment: "^[ \t]*#[ \t]*print[ \t]*\(.*\)"
