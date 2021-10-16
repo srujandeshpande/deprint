@@ -2,9 +2,10 @@ const langs = {
   js: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
   py: ['python'],
   c: ['c', 'cpp'],
+  rs: ['rust'],
   rb: ['ruby'],
   hash: ['python', 'ruby'],
-  slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java']
+  slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java', 'rust']
 };
 
 const patterns = {
@@ -23,6 +24,9 @@ const patterns = {
   c: {
     printf: "^[ \t]*printf[ \t]*\(.*\)[ \t]*;[ \t]*$",
     cout: "^[ \t]*cout.*<<.*;[ \t]*$"
+  },
+  rs: {
+    println: "^[ \t]*println![ \t]*\(.*\)[ \t]*;[ \t]*$",
   },
   comment: {
     hash: "^[ \t]*#.*",
