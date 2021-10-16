@@ -3,9 +3,10 @@ const langs = {
   py: ['python'],
   c: ['c', 'cpp'],
   rs: ['rust'],
+  go: ['golang'],
   rb: ['ruby'],
   hash: ['python', 'ruby'],
-  slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java', 'rust']
+  slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java', 'rust', 'golang']
 };
 
 const patterns = {
@@ -20,6 +21,9 @@ const patterns = {
   js: {
     log: "^[ \t]*console\.log[ \t]*\(.*\)",
     logComment: "^[ \t]*\/\/[ \t]*console\.log[ \t]*\(.*\)"
+  },
+  go: {
+    printf: "^[ \t]*fmt.Println[ \t]*\(.*\)[ \t]*$"
   },
   c: {
     printf: "^[ \t]*printf[ \t]*\(.*\)[ \t]*;[ \t]*$",
