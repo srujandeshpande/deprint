@@ -135,6 +135,20 @@ export function activate(context: vscode.ExtensionContext) {
         }
       });
     }
+    else if (langs.sh.includes(langId)) {
+      // Bash Stuff, removes commented echos
+      textEditor.edit(function (editBuilder) {
+        // Iterate through each line
+        for (var i = 0; i < textEditor.document.lineCount; i++) {
+          let linetext = textEditor.document.lineAt(i).text;
+
+          if (linetext.match(patterns.sh.echoComment)) {
+            var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
+            editBuilder.replace(textRange, "");
+          }
+        }
+      });
+    }
     else {
       return;
     }
