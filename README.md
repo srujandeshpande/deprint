@@ -2,7 +2,7 @@
 
 Ever forget to remove print or log statements from your code only to realize much later? Here's a simple solution. DePrint provides you the option of commenting or removing these statements entirely so that your code is as tidy as tidy can be.
 
-> Currently Supports JavaScript Family and Python files
+> Currently Supports JavaScript Family and Python files. Bash coming soon!
 
 ## Usage
 
