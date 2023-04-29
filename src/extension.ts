@@ -66,6 +66,26 @@ export function activate(context: vscode.ExtensionContext) {
         }
       });
     }
+    else if (langs.rb.includes(langId)) {
+      // Python Stuff print()
+      textEditor.edit(function (editBuilder) {
+        // Iterate through each line
+        for (var i = 0; i < textEditor.document.lineCount; i++) {
+          let linetext = textEditor.document.lineAt(i).text;
+          var newline = linetext;
+
+          if (linetext.match(patterns.rb.print)) {
+            var j = 0;
+            for (j = 0; j < linetext.length; j++) {
+              if (linetext[j] != ' ' && linetext[j] != '\t') break;
+            }
+            newline = [linetext.slice(0, j), "# ", linetext.slice(j)].join('');
+          }
+          var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i, textEditor.document.lineAt(i).range.end.character);
+          editBuilder.replace(textRange, newline);
+        }
+      });
+    }
     else if (langs.c.includes(langId)) {
       // C,C++ Stuff print()
       textEditor.edit(function (editBuilder) {
@@ -143,6 +163,20 @@ export function activate(context: vscode.ExtensionContext) {
           let linetext = textEditor.document.lineAt(i).text;
 
           if (linetext.match(patterns.sh.echoComment)) {
+            var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
+            editBuilder.replace(textRange, "");
+          }
+        }
+      });
+    }
+    else if (langs.rb.includes(langId)) {
+      // Ruby Stuff puts comments
+      textEditor.edit(function (editBuilder) {
+        // Iterate through each line
+        for (var i = 0; i < textEditor.document.lineCount; i++) {
+          let linetext = textEditor.document.lineAt(i).text;
+
+          if (linetext.match(patterns.rb.putsComment)) {
             var textRange = new vscode.Range(i, textEditor.document.lineAt(i).range.start.character, i + 1, textEditor.document.lineAt(i + 1).range.start.character);
             editBuilder.replace(textRange, "");
           }
