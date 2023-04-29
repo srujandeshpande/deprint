@@ -1,7 +1,7 @@
 //@ts-check
 
 'use strict';
-
+const __dirname = path.resolve();
 const path = require('path');
 
 /**@type {import('webpack').Configuration}*/
@@ -18,7 +18,8 @@ const config = {
   },
   devtool: 'nosources-source-map',
   externals: {
-    vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
+    vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
+    path: 'commonjs path',
     // modules added here also need to be added in the .vsceignore file
   },
   resolve: {

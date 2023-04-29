@@ -15,11 +15,6 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:deprint.comment.print",
-    "onCommand:deprint.delete.comment.print",
-    "onCommand:deprint.delete.comment"
-  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
