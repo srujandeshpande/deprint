@@ -4,6 +4,7 @@ const langs = {
   c: ['c', 'cpp'],
   sh: ['bash'],
   hash: ['python'],
+  rb:['ruby'],
   slash: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'c', 'c++', 'java']
 };
 
@@ -14,6 +15,11 @@ const patterns = {
   py: {
     print: "^[ \t]*print[ \t]*\(.*\)",
     printComment: "^[ \t]*#[ \t]*print[ \t]*\(.*\)"
+  },
+  rb: {
+    puts: "^[ \t]*puts[ \t]*(.*\)",
+    putsComment: "^[ \t]*#[ \t]*puts[ \t]*(.*\)"
+
   },
   js: {
     log: "^[ \t]*console\.log[ \t]*\(.*\)",
